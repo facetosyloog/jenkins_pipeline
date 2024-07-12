@@ -1,9 +1,16 @@
 pipeline{
   agent any
+  environment {
+    GOPATH = "${env.WORKSPACE}/"
+  }
+  tools {
+    go 'go1.22.4'
+  }
   stages{
     stage('Build'){
       steps{
-        echo 'Hello World!'
+        echo 'go1.22.4 build'
+        sh 'go build'
       }
     }
   }
