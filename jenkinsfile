@@ -7,11 +7,30 @@ pipeline{
     go 'go1.22.4'
   }
   stages{
+    stage('Check Version'){
+      steps{
+        script{
+          def version = sh(script: 'cat version.txt', returnStdout:true).trim()
+          echo "Version is: $version"
+        }
+      }
+    }
     stage('Build'){
       steps{
         echo 'go1.22.4 build'
         sh 'go env -w GOOS=darwin GOARCH=amd64'
         sh 'go build -o jenkins-pipeline'
+      }
+    }
+    stage('Deploy'){
+      steps{
+        script{
+          if(params.DEPLOY){
+            echo "Deployment to production..."
+          }else{
+            echo "Deployment skipped."
+          }
+        }
       }
     }
   }
