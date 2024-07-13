@@ -17,7 +17,7 @@ pipeline{
   }
   post{
     always{
-      archiveArtifacts artifacts:'jenkins-pipeline-test',fingerprint:true,onlyIfSuccessful:true
+      archiveArtifacts artifacts:'jenkins-pipeline',fingerprint:true,onlyIfSuccessful:true
     }
   }
 }
